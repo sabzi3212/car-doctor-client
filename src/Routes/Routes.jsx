@@ -4,6 +4,9 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import CheckOUT from "../Pages/CheckOUT.JSX";
+import Bookings from "../Pages/Bookings/Bookings";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +25,16 @@ const router = createBrowserRouter([
         {
           path:'/signUp',
           element: <SignUp></SignUp>
+        },
+        {
+          path:'/checkout/:id',
+          element: <PrivateRoute><CheckOUT></CheckOUT></PrivateRoute>,
+          loader: ({params})=> fetch(`https://car-doctor-server-nine-ivory.vercel.app/services/${params.id}`)
+          
+        },
+        {
+          path: '/bookings',
+          element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
         }
       ]
     },
